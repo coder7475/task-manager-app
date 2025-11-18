@@ -1,6 +1,7 @@
 import { pgTable, uuid, text, timestamp } from 'drizzle-orm/pg-core';
 
 import { usersTable } from './users';
+import { relations } from 'drizzle-orm';
 
 export const passportTable = pgTable('passport', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -23,3 +24,4 @@ export const passportTable = pgTable('passport', {
     .notNull()
     .$onUpdate(() => new Date()),
 });
+

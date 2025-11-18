@@ -20,3 +20,4 @@ export const profilesTable = pgTable('profiles', {
     .notNull()
     .$onUpdate(() => new Date()),
 });
+

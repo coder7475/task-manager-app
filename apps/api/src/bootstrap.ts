@@ -70,15 +70,15 @@ export const bootstrap = async (app: NestExpressApplication) => {
   });
 
   app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true, // 只允许DTO中有定义的属性，自动剔除多余属性
-      forbidNonWhitelisted: true, // 如果有未定义的属性，抛出异常而不是静默剔除
-      transform: true, // 自动转换请求参数为DTO声明的类型
-      transformOptions: {
-        enableImplicitConversion: true, // 启用隐式类型转换（如字符串转数字）
-      },
-      disableErrorMessages: configService.get('NODE_ENV') === 'production',
-    }),
+  new ValidationPipe({
+    whitelist: true, // Only allow properties defined in the DTO, automatically strip extra properties
+    forbidNonWhitelisted: true, // Throw an exception if undefined properties are present, rather than silently stripping them
+    transform: true, // Automatically transform request parameters to the types declared in the DTO
+    transformOptions: {
+      enableImplicitConversion: true, // Enable implicit type conversion (e.g., string to number)
+    },
+    disableErrorMessages: configService.get('NODE_ENV') === 'production', // Disable detailed error messages in production
+  }),
   );
 
   app.useGlobalInterceptors(new LoggerErrorInterceptor());
